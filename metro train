@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char name[50];
+    int choice, tickets;
+    int source, destination;
+    int fare_per_station = 10;
+    int total_fare;
+    char stations[][20] = {
+        "Central", "Egmore", "Chetpet", "Nungambakkam", "Kodambakkam"
+    };
+    printf("===== METRO TRAIN BOOKING SYSTEM =====\n");
+    printf("Enter your name: ");
+    scanf("%s", name);
+    do {
+        printf("\n1. Book Ticket");
+        printf("\n2. Exit");
+        printf("\nEnter your choice: ");
+        scanf("%d", &choice);
+        switch(choice) {
+            case 1:
+                printf("\nAvailable Stations:\n");
+                for(int i = 0; i < 5; i++) {
+                    printf("%d. %s\n", i+1, stations[i]);
+                }
+                printf("Select Source (1-5): ");
+                scanf("%d", &source);
+                printf("Select Destination (1-5): ");
+                scanf("%d", &destination);
+                if(source == destination) {
+                    printf("Source and Destination cannot be same!\n");
+                    break;
+                }
+                printf("Enter number of tickets: ");
+                scanf("%d", &tickets);
+                int distance = source > destination ? source - destination : destination - source;
+                total_fare = distance * fare_per_station * tickets;
+                printf("\n===== BOOKING DETAILS =====\n");
+                printf("Passenger Name: %s\n", name);
+                printf("From: %s\n", stations[source - 1]);
+                printf("To: %s\n", stations[destination - 1]);
+                printf("Tickets: %d\n", tickets);
+                printf("Total Fare: Rs.%d\n", total_fare);
+                printf("Booking Successful!\n");
+                break;
+            case 2:
+                printf("Thank you for using Metro Booking System!\n");
+                break;
+            default:
+                printf("Invalid choice!\n");
+        }
+    } while(choice != 2);
+    return 0;
+}
